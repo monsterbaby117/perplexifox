@@ -1,0 +1,19 @@
+# Ignore build output
+web-ext-artifacts/
+
+# Ignore node modules if you're using npm
+node_modules/
+
+# Ignore temporary files
+*.tmp
+*.bak
+*.swp
+
+# Ignore log files
+*.log
+
+# Ignore .DS_Store files on macOS
+.DS_Store
+
+# Ignore compiled files
+*.xpi
