@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "Perplexifox",
+  "version": "1.0",
+  "description": "Suchen Sie ausgewählten Text oder Bilder mit Perplexity",
+  "icons": {
+    "16": "../icons/icon-16.png",
+    "32": "../icons/icon-32.png",
+    "48": "../icons/icon-48.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "activeTab"
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  }
+}
+
