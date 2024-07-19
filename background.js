@@ -1,26 +1,30 @@
 browser.contextMenus.create({
   id: "search-perplexity",
   title: "Mit Perplexity suchen",
-  contexts: ["image"]
+  contexts: ["selection", "image"]
 });
 
 browser.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId === "search-perplexity") {
-    if (info.srcUrl) {
-      // Bild-URL-basierte Suche
-      searchWithImageUrl(info.srcUrl);
-    } else {
-      // Inhaltsbasierte Suche
-      fetchImageContent(info.srcUrl).then(imageData => {
-        searchWithImageContent(imageData);
-      });
+    if (info.selectionText) {
+      // Textbasierte Suche
+      searchWithText(info.selectionText);
+    } else if (info.srcUrl) {
+      // Bildbasierte Suche
+      searchWithImage(info.srcUrl);
     }
   }
 });
 
-function searchWithImageUrl(url) {
-  let searchUrl = `https://www.perplexity.ai/search?q=${encodeURIComponent(url)}`;
-  browser.tabs.create({ url: searchUrl });
+function searchWithText(text) {
+  let url = `https://www.perplexity.ai/search?q=${encodeURIComponent(text)}`;
+  browser.tabs.create({ url });
+}
+
+function searchWithImage(imageUrl) {
+
+  let url = `https://www.perplexity.ai/search?q=${encodeURIComponent(imageUrl)}`;
+  browser.tabs.create({ url });
 }
 
 function fetchImageContent(url) {
@@ -32,10 +36,4 @@ function fetchImageContent(url) {
       reader.onerror = reject;
       reader.readAsDataURL(blob);
     }));
-}
-
-function searchWithImageContent(imageData) {
-  // Hier müssten Sie die API von Perplexity anpassen, um Bilddaten zu akzeptieren
-  let searchUrl = `https://www.perplexity.ai/image-search?data=${encodeURIComponent(imageData)}`;
-  browser.tabs.create({ url: searchUrl });
 }
