@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Perplexifox",
-  "version": "1.0",
+  "version": "1.1",
   "description": "Suchen Sie ausgewählten Text oder Bilder mit Perplexity",
   "icons": {
     "16": "icons/perplexifox-16.png",
@@ -10,13 +10,30 @@
   },
   "permissions": [
     "contextMenus",
-    "activeTab"
+    "activeTab",
+    "storage"
+  ],
+  "optional_permissions": [
+    "webRequest"
   ],
   "host_permissions": [
     "https://www.perplexity.ai/*"
   ],
   "background": {
-    "service_worker": "background.js"
+    "scripts": ["background.js"]
   },
-  "action": {}
+  "action": {
+    "default_icon": {
+      "16": "icons/perplexifox-16.png",
+      "32": "icons/perplexifox-32.png",
+      "48": "icons/perplexifox-48.png"
+    },
+    "default_title": "Perplexifox"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
 }
