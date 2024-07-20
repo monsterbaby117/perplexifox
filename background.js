@@ -1,6 +1,6 @@
 browser.contextMenus.create({
   id: "search-perplexity",
-  title: "Mit Perplexity suchen",
+  title: "Search with Perplexity",
   contexts: ["selection", "image"]
 });
 
